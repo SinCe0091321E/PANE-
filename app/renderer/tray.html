@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<title>PANE</title>
+<style>
+  :root { color-scheme: light dark; }
+  html, body { margin: 0; height: 100%; background: transparent; }
+  body {
+    padding: 7px;
+    font-family: "Microsoft YaHei UI", "PingFang SC", "Segoe UI", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    user-select: none;
+  }
+  .panel {
+    padding: 5px;
+    border-radius: 12px;
+    background: rgba(26, 30, 38, .97);
+    color: #e9edf5;
+    border: 1px solid rgba(255, 255, 255, .08);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .38);
+  }
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: 12.5px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
+    transition: background .12s ease, color .12s ease;
+  }
+  .item:hover { background: rgba(127, 127, 127, .18); }
+  .item:active { background: rgba(127, 127, 127, .26); }
+  .item svg {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 auto;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: .92;
+  }
+  .sep { height: 1px; margin: 4px 6px; background: currentColor; opacity: .1; }
+  .item.danger:hover { background: rgba(220, 70, 70, .16); color: #ff6b6b; }
+
+  @media (prefers-color-scheme: light) {
+    .panel {
+      background: rgba(255, 255, 255, .98);
+      color: #1c2433;
+      border-color: rgba(0, 0, 0, .08);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, .18);
+    }
+    .item:hover { background: rgba(0, 0, 0, .06); }
+  }
+</style>
+</head>
+<body>
+  <div class="panel">
+    <button class="item" data-act="open">
+      <svg viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="14" rx="2.5"/><path d="M3.5 9h17"/></svg>
+      <span>打开</span>
+    </button>
+    <button class="item" data-act="settings">
+      <svg viewBox="0 0 24 24"><path d="M4 7h6"/><path d="M15 7h5"/><circle cx="12.5" cy="7" r="2.2"/><path d="M4 17h8"/><path d="M17 17h3"/><circle cx="15" cy="17" r="2.2"/></svg>
+      <span>设置</span>
+    </button>
+    <div class="sep"></div>
+    <button class="item danger" data-act="quit">
+      <svg viewBox="0 0 24 24"><path d="M12 3.5v8"/><path d="M6.9 6.3a8 8 0 1 0 10.2 0"/></svg>
+      <span>退出</span>
+    </button>
+  </div>
+  <script>
+    document.querySelectorAll('[data-act]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (window.tray) window.tray.action(btn.dataset.act);
+      });
+    });
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && window.tray) window.tray.close();
+    });
+  </script>
+</body>
+</html>

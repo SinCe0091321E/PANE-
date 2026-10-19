@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src https: http: data: file:; style-src 'self' 'unsafe-inline'; script-src 'self';" />
+  <title>图片预览</title>
+  <link rel="stylesheet" href="lightbox.css" />
+</head>
+<body>
+  <img id="photo" alt="" />
+  <div class="bar">
+    <div class="name" id="name">图片预览</div>
+    <div class="spacer"></div>
+    <button id="zoom-out" title="缩小">−</button>
+    <span id="zoom-label">100%</span>
+    <button id="zoom-in" title="放大">+</button>
+    <button id="save">保存</button>
+    <button id="close" title="关闭 (Esc)">关闭</button>
+  </div>
+  <div class="tip">滚轮缩放 · 拖动平移 · 右键保存 · Esc 关闭</div>
+  <script src="lightbox.js"></script>
+</body>
+</html>

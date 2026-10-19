@@ -1,0 +1,79 @@
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #0b0c10;
+  color: #eef1f7;
+  font-family: "Microsoft YaHei UI", "PingFang SC", "Segoe UI", system-ui, sans-serif;
+  user-select: none;
+}
+
+body { display: grid; place-items: center; }
+
+#photo {
+  max-width: 96vw;
+  max-height: 92vh;
+  border-radius: 8px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .6);
+  transition: transform .12s cubic-bezier(.22, 1, .36, 1);
+  cursor: grab;
+  will-change: transform;
+  image-rendering: auto;
+}
+#photo.dragging { cursor: grabbing; transition: none; }
+
+.bar {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 9px;
+  border-radius: 999px;
+  background: rgba(24, 27, 35, .82);
+  border: 1px solid rgba(255, 255, 255, .08);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, .38);
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+body:hover .bar { opacity: 1; }
+.bar .name { font-size: 11.5px; color: rgba(238, 241, 247, .62); max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 0 6px; }
+.bar .spacer { flex: 1 1 auto; }
+.bar span { font-size: 11px; color: rgba(238, 241, 247, .6); min-width: 40px; text-align: center; font-variant-numeric: tabular-nums; }
+.bar button {
+  border: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .09);
+  color: #eef1f7;
+  font: inherit;
+  font-size: 11.5px;
+  cursor: pointer;
+  transition: background .14s ease;
+}
+.bar button:hover { background: rgba(255, 255, 255, .17); }
+#close { background: rgba(255, 255, 255, .14); }
+
+.tip {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(24, 27, 35, .72);
+  color: rgba(238, 241, 247, .55);
+  font-size: 11px;
+  opacity: 0;
+  transition: opacity .2s ease;
+  pointer-events: none;
+}
+body:hover .tip { opacity: 1; }

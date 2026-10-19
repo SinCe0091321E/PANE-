@@ -1,0 +1,20 @@
+﻿# 运行时（Electron 体积过大，放在 Releases 提供）
+runtime/
+
+# 本地数据与日志
+data/
+launch.log
+*.log
+
+# 依赖 / 临时产物
+node_modules/
+_screens/
+_screen_test.png
+*.zip
+
+# 系统文件
+Thumbs.db
+.DS_Store
+desktop.ini
+
+_shot*.png

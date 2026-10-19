@@ -1,0 +1,32 @@
+'use strict';
+
+/**
+ * 这是一个「怎么写适配器」的模板，不会被自动加载（后缀是 .example）。
+ * 复制成 my-site.adapter.js 放到同一个目录，重启浮窗即可生效。
+ *
+ * 字段说明见 README.md「适配器接口」一章。
+ */
+module.exports = {
+  id: 'my-site',
+  name: '我的站点',
+  description: '一句话描述这个站点被改造成什么样。',
+  mode: 'generic', // translate | gallery | generic
+  match: ['*://example.com/*'],
+  tools: ['zoom', 'open-external'],
+
+  // 需要隐藏的站点外壳（CSS 选择器数组，命中即隐藏）
+  hide: ['.site-header', '.site-footer', '.ad'],
+
+  // 内容识别：按优先级排列，命中第一个即使用
+  selectors: {
+    source: ['textarea#input'],
+    result: ['#output'],
+    galleryItem: ['img']
+  },
+
+  // 注入到页面里的 CSS，可以随意改字号、间距、配色
+  css: `body { font-family: "Microsoft YaHei UI", sans-serif; }`,
+
+  // 自动聚焦裁剪：translate 模式下只保留原文/译文所在容器
+  crop: false
+};

@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https: file:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'none'; font-src 'self' data:;" />
+  <title>PANE</title>
+  <link rel="stylesheet" href="themes.css" />
+  <link rel="stylesheet" href="shell.css" />
+</head>
+<body>
+  <svg class="sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M9 4h6v5.6l3.2 3.2H5.8L9 9.6V4Z"/><path d="M12 12.8V21"/></symbol>
+      <symbol id="i-gear" viewBox="0 0 24 24"><path d="M4 7h9M18 7h2M4 12h3M12 12h8M4 17h8M17 17h3"/><circle cx="15.5" cy="7" r="2.2"/><circle cx="9.5" cy="12" r="2.2"/><circle cx="14.5" cy="17" r="2.2"/></symbol>
+      <symbol id="i-move" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/><path d="M9.4 5.6 12 3l2.6 2.6M9.4 18.4 12 21l2.6-2.6M5.6 9.4 3 12l2.6 2.6M18.4 9.4 21 12l-2.6 2.6"/></symbol>
+      <symbol id="i-tray" viewBox="0 0 24 24"><path d="M12 3.5v10"/><path d="M8.2 9.8 12 13.6l3.8-3.8"/><path d="M4.5 16.5v2.2c0 1 .8 1.8 1.8 1.8h11.4c1 0 1.8-.8 1.8-1.8v-2.2"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.4"/><path d="M15.6 15.6 20.5 20.5"/></symbol>
+      <symbol id="i-speak" viewBox="0 0 24 24"><path d="M4 9.2v5.6h3.2L12.6 19V5L7.2 9.2H4Z"/><path d="M15.4 8.6a5 5 0 0 1 0 6.8"/><path d="M18.2 5.8a8.6 8.6 0 0 1 0 12.4"/></symbol>
+      <symbol id="i-phonetic" viewBox="0 0 24 24"><path d="M3.5 17 7.8 7l4.3 10"/><path d="M5.2 13.4h5.2"/><path d="M16 9v8M13.4 12.4h5.2"/></symbol>
+      <symbol id="i-zoom" viewBox="0 0 24 24"><circle cx="10.6" cy="10.6" r="6.4"/><path d="M15.4 15.4 20.5 20.5M8 10.6h5.2M10.6 8v5.2"/></symbol>
+      <symbol id="i-crop" viewBox="0 0 24 24"><path d="M7 3v14h14"/><path d="M3 7h14v14"/></symbol>
+      <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.4-5.7"/><path d="M20 4v4.4h-4.4"/></symbol>
+      <symbol id="i-back" viewBox="0 0 24 24"><path d="M14.5 5.5 8 12l6.5 6.5"/></symbol>
+      <symbol id="i-forward" viewBox="0 0 24 24"><path d="M9.5 5.5 16 12l-6.5 6.5"/></symbol>
+      <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5"/><path d="M6.5 9.5V20h11V9.5"/></symbol>
+      <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6"/><path d="M20 4 11 13"/><path d="M18 14.5V19a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 19V8a1.5 1.5 0 0 1 1.5-1.5H10"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4.5 6.5h15M9.5 6.5V4h5v2.5M6.5 6.5 7.5 20h9l1-13.5"/><path d="M10.2 10v6.2M13.8 10v6.2"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.6 4.6L19 7"/></symbol>
+      <symbol id="i-dots" viewBox="0 0 24 24"><circle cx="8" cy="6" r="1.2"/><circle cx="16" cy="6" r="1.2"/><circle cx="8" cy="12" r="1.2"/><circle cx="16" cy="12" r="1.2"/><circle cx="8" cy="18" r="1.2"/><circle cx="16" cy="18" r="1.2"/></symbol>
+      <symbol id="i-pick" viewBox="0 0 24 24"><path d="M4 20 20 4"/><path d="M14.5 4H20v5.5"/><path d="M4 20h5.5"/></symbol>
+      <symbol id="i-image" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><circle cx="8.6" cy="10" r="1.6"/><path d="m4.5 17 4.6-4.3a2 2 0 0 1 2.7 0l3.3 3.1 1.6-1.4a2 2 0 0 1 2.6 0l1.2 1"/></symbol>
+      <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"/><path d="M3.6 12h16.8"/><path d="M12 3.6c2.6 2.4 4 5.3 4 8.4s-1.4 6-4 8.4c-2.6-2.4-4-5.3-4-8.4s1.4-6 4-8.4Z"/></symbol>
+      <symbol id="i-expand" viewBox="0 0 24 24"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/><path d="M4 4l4.5 4.5M20 4l-4.5 4.5M4 20l4.5-4.5M20 20l-4.5-4.5"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11"/><path d="M7.5 10.5 12 15l4.5-4.5"/><path d="M4.5 19.5h15"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11" height="11" rx="2.5"/><path d="M5.5 15.5h-1A1.5 1.5 0 0 1 3 14V5.5A2.5 2.5 0 0 1 5.5 3H14a1.5 1.5 0 0 1 1.5 1.5V5.5"/></symbol>
+      <symbol id="i-swap" viewBox="0 0 24 24"><path d="M7 8h11l-3-3M17 16H6l3 3"/></symbol>
+      <symbol id="i-reader" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5Z"/><path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H20v3H6.5A2.5 2.5 0 0 1 4 20.5Z"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10-6.5z" fill="currentColor" stroke="none"/></symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24"><rect x="7" y="5" width="3.4" height="14" rx="1" fill="currentColor" stroke="none"/><rect x="13.6" y="5" width="3.4" height="14" rx="1" fill="currentColor" stroke="none"/></symbol>
+      <symbol id="i-volume" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13L7.5 14.5H4z"/><path d="M15.5 9a4 4 0 0 1 0 6"/><path d="M18 6.5a7.5 7.5 0 0 1 0 11"/></symbol>
+      <symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13L7.5 14.5H4z"/><path d="m16 9 5 6M21 9l-5 6"/></symbol>
+      <symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M6.5 4h11v16l-5.5-4-5.5 4z"/></symbol>
+      <symbol id="i-headphone" viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="13.5" width="4.5" height="7" rx="2"/><rect x="16.5" y="13.5" width="4.5" height="7" rx="2"/></symbol>
+      <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3.5 7.5A1.5 1.5 0 0 1 5 6h4l1.6 2H19a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 19 19H5a1.5 1.5 0 0 1-1.5-1.5Z"/></symbol>
+      <symbol id="i-window-plus" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="12.5" height="10.5" rx="2"/><path d="M6.5 7.5h7"/><path d="M18 12.5v8M14 16.5h8"/></symbol>
+    </defs>
+  </svg>
+
+  <div id="app" aria-live="polite">
+    <aside id="rail" aria-label="功能区">
+      <div class="brand" title="PANE">
+        <svg viewBox="0 0 24 24" class="brand-mark"><rect x="4.5" y="4.5" width="15" height="11" rx="3"/><path d="M8.5 19.5h7"/></svg>
+      </div>
+
+      <button class="rail-btn" data-act="site" data-label="切换站点" aria-label="切换站点">
+        <svg><use href="#i-globe"></use></svg>
+      </button>
+
+      <div class="rail-sep"></div>
+
+      <div class="rail-group" id="nav-group">
+        <button class="rail-btn" data-act="back" data-label="后退" aria-label="后退"><svg><use href="#i-back"></use></svg></button>
+        <button class="rail-btn" data-act="forward" data-label="前进" aria-label="前进"><svg><use href="#i-forward"></use></svg></button>
+        <button class="rail-btn" data-act="reload" data-label="刷新" aria-label="刷新"><svg><use href="#i-refresh"></use></svg></button>
+        <button class="rail-btn" data-act="home" data-label="回到首页" aria-label="回到首页"><svg><use href="#i-home"></use></svg></button>
+      </div>
+
+      <div class="rail-sep"></div>
+
+      <div class="rail-group" id="tool-group"></div>
+
+      <div class="rail-sep"></div>
+
+      <div class="rail-group" id="sys-group">
+        <button class="rail-btn" data-act="settings" data-label="设置" aria-label="设置"><svg><use href="#i-gear"></use></svg></button>
+        <button class="rail-btn" data-act="move" data-label="移动 / 调整大小" aria-label="移动或调整大小"><svg><use href="#i-move"></use></svg></button>
+        <button class="rail-btn" data-act="pin" data-label="固定在最上层" aria-label="固定在最上层"><svg><use href="#i-pin"></use></svg></button>
+        <button class="rail-btn" data-act="new-window" data-label="新建窗口" aria-label="新建窗口"><svg><use href="#i-window-plus"></use></svg></button>
+        <button class="rail-btn" data-act="minimize" data-label="收到后台" aria-label="收到后台"><svg><use href="#i-tray"></use></svg></button>
+        <button class="rail-btn danger" data-act="close" data-label="关闭软件" aria-label="关闭软件"><svg><use href="#i-close"></use></svg></button>
+      </div>
+    </aside>
+
+    <main id="stage">
+      <div id="view-host"></div>
+
+      <div id="loading" class="loading"><span></span></div>
+
+      <div id="overlay" class="overlay hidden">
+        <div class="overlay-card">
+          <svg class="overlay-art" viewBox="0 0 120 90" aria-hidden="true">
+            <rect x="16" y="10" width="88" height="62" rx="10" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 5"/>
+            <path d="M46 34h28M60 34v22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="60" cy="80" r="3" fill="currentColor"/>
+          </svg>
+          <p class="overlay-title" id="overlay-title">这个网站还没醒过来</p>
+          <p class="overlay-text" id="overlay-text">检查网络后再试一次，或者换一个站点。</p>
+          <button class="btn ghost" id="overlay-retry">重新加载</button>
+        </div>
+      </div>
+
+      <div id="hint" class="hint hidden">
+        <svg viewBox="0 0 24 24" class="hint-icon"><use href="#i-pick"></use></svg>
+        <span id="hint-text">没有识别到内容区域</span>
+        <button class="hint-btn" id="hint-action">自定义</button>
+      </div>
+
+      <div id="move-layer" class="move-layer" title="拖动窗口 · 点击左侧箭头退出">
+        <div class="move-hint">
+          <svg viewBox="0 0 24 24"><use href="#i-move"></use></svg>
+          <span>拖动窗口 · 拖拽边缘调整大小 · 再点一次箭头退出</span>
+        </div>
+      </div>
+
+      <div id="preview" class="preview hidden" aria-hidden="true">
+        <img id="preview-image" alt="" />
+        <div class="preview-bar">
+          <span class="preview-name" id="preview-name">图片预览</span>
+          <span class="preview-spacer"></span>
+          <button class="preview-btn" data-pv="out" title="缩小">−</button>
+          <span class="preview-zoom" id="preview-zoom">100%</span>
+          <button class="preview-btn" data-pv="in" title="放大">+</button>
+          <button class="preview-btn icon" data-pv="system" title="系统全屏" aria-label="系统全屏"><svg><use href="#i-expand"></use></svg></button>
+          <button class="preview-btn icon" data-pv="save" title="保存图片" aria-label="保存图片"><svg><use href="#i-download"></use></svg></button>
+          <button class="preview-btn icon" data-pv="close" title="关闭（Esc）" aria-label="关闭"><svg><use href="#i-close"></use></svg></button>
+        </div>
+      </div>
+
+      <div id="translate" class="translate hidden" aria-hidden="true">
+        <div class="tr-top">
+          <select id="tr-source" title="原文语言"></select>
+          <button id="tr-swap" class="tr-swap" title="互换语言" aria-label="互换语言"><svg><use href="#i-swap"></use></svg></button>
+          <select id="tr-target" title="译文语言"></select>
+        </div>
+        <div class="tr-cols">
+          <section class="tr-card">
+            <div class="tr-head"><span>原文</span><span class="tr-sub" id="tr-count">0</span></div>
+            <textarea id="tr-input" placeholder="输入或粘贴要翻译的内容…" spellcheck="false"></textarea>
+            <div class="tr-foot">
+              <span class="tr-ph" id="tr-source-ph"></span>
+              <button class="tr-btn" data-tr="speak-src" title="朗读原文"><svg><use href="#i-speak"></use></svg></button>
+            </div>
+          </section>
+          <section class="tr-card">
+            <div class="tr-head"><span>译文</span><span class="tr-sub" id="tr-status"></span></div>
+            <div id="tr-output" class="tr-output" aria-live="polite"></div>
+            <div class="tr-foot">
+              <span class="tr-ph" id="tr-target-ph"></span>
+              <button class="tr-btn" data-tr="speak-out" title="朗读译文"><svg><use href="#i-speak"></use></svg></button>
+              <button class="tr-btn" data-tr="copy" title="复制译文"><svg><use href="#i-copy"></use></svg></button>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div id="reader" class="reader hidden" aria-hidden="true">
+        <div class="rd-top">
+          <span id="rd-title" class="rd-title">文本阅读</span>
+          <div class="rd-actions">
+            <button class="rd-btn" data-rd="smaller" title="缩小字号">A−</button>
+            <button class="rd-btn" data-rd="bigger" title="放大字号">A+</button>
+            <button class="rd-btn" data-rd="mark" title="标注：先选中文字，再选颜色">标注</button>
+            <button class="rd-btn" data-rd="unmark" title="去掉选中文字的标注">去标</button>
+            <button class="rd-btn" data-rd="toc" title="目录">目录</button>
+            <button class="rd-btn" data-rd="clear" title="清除全部标注">清除</button>
+            <button class="rd-btn" data-rd="download" title="下载文本">下载</button>
+            <button class="rd-btn" data-rd="site" title="浏览原网站（搜索/检索）">原页</button>
+            <button class="rd-btn" data-rd="reload" title="重新提取">刷新</button>
+          </div>
+        </div>
+        <div class="rd-progress"><i id="rd-progress"></i></div>
+        <div id="rd-body" class="rd-body">
+          <div id="rd-article" class="rd-article"><p class="rd-empty">正在提取正文…</p></div>
+        </div>
+        <div id="rd-toc" class="rd-toc hidden">
+          <div class="rd-toc-head">
+            <span>目录</span>
+            <button class="rd-toc-close" data-rd="toc" aria-label="关闭目录">×</button>
+          </div>
+          <div id="rd-toc-list" class="rd-toc-list"></div>
+        </div>
+        <div id="rd-sel" class="rd-sel hidden">
+          <button data-color="yellow" class="rd-dot yellow" title="黄色标注"></button>
+          <button data-color="green" class="rd-dot green" title="绿色标注"></button>
+          <button data-color="pink" class="rd-dot pink" title="粉色标注"></button>
+          <button data-sel="remove" class="rd-tool">取消标注</button>
+        </div>
+      </div>
+
+      <div id="audiopanel" class="audiopanel hidden">
+        <div class="au-top">
+          <span id="au-title" class="au-title">音频参考</span>
+          <button class="au-close" data-au="close" title="返回原网站">原页</button>
+        </div>
+        <div class="au-main">
+          <div class="au-visual">
+            <svg><use href="#i-headphone"></use></svg>
+            <span class="au-sub">音频模式 · 正在使用页面音轨</span>
+          </div>
+          <div class="vd-progress-row">
+            <input id="au-progress" type="range" min="0" max="1000" value="0" step="1" title="播放进度" />
+            <div id="au-ticks" class="vd-ticks"></div>
+          </div>
+          <div class="vd-time" id="au-time">00:00 / 00:00</div>
+          <div class="vd-row">
+            <button id="au-play" class="vd-btn" title="播放 / 暂停"><svg><use href="#i-play"></use></svg></button>
+            <button id="au-back" class="vd-btn vd-text" title="后退 10 秒">-10s</button>
+            <button id="au-fwd" class="vd-btn vd-text" title="前进 10 秒">+10s</button>
+            <span class="vd-spacer"></span>
+            <button id="au-mute" class="vd-btn" title="静音"><svg><use href="#i-volume"></use></svg></button>
+            <input id="au-volume" class="vd-volume" type="range" min="0" max="100" value="100" title="音量" />
+          </div>
+          <div class="vd-row">
+            <button id="au-mark" class="vd-btn vd-text" title="在当前位置加标记">标记</button>
+            <button id="au-marks" class="vd-btn vd-text" title="标记列表">标记 0</button>
+          </div>
+        </div>
+        <div id="au-marker-list" class="vd-marker-list au-marker-list hidden"></div>
+      </div>
+
+      <div id="videodock" class="videodock hidden">
+        <div class="vd-progress-row">
+          <input id="vd-progress" type="range" min="0" max="1000" value="0" step="1" title="播放进度" />
+          <div id="vd-ticks" class="vd-ticks"></div>
+        </div>
+        <div class="vd-row">
+          <button id="vd-play" class="vd-btn" title="播放 / 暂停"><svg><use href="#i-play"></use></svg></button>
+          <span id="vd-time" class="vd-time">00:00 / 00:00</span>
+          <span class="vd-spacer"></span>
+          <button id="vd-mute" class="vd-btn" title="静音"><svg><use href="#i-volume"></use></svg></button>
+          <input id="vd-volume" class="vd-volume" type="range" min="0" max="100" value="100" title="音量" />
+          <select id="vd-rate" class="vd-rate" title="倍速播放">
+            <option value="0.5">0.5×</option>
+            <option value="0.75">0.75×</option>
+            <option value="1" selected>1×</option>
+            <option value="1.25">1.25×</option>
+            <option value="1.5">1.5×</option>
+            <option value="1.75">1.75×</option>
+            <option value="2">2×</option>
+          </select>
+          <button id="vd-mark" class="vd-btn vd-text" title="在当前位置加标记">标记</button>
+          <button id="vd-marks" class="vd-btn vd-text" title="标记列表">标记 0</button>
+        </div>
+      </div>
+      <div id="vd-marker-list" class="vd-marker-list hidden"></div>
+
+      <div id="offline" class="offline hidden">
+        <svg><use href="#i-globe"></use></svg>
+        <strong>当前没有网络连接</strong>
+        <p>检查网络后会自动恢复，也可以点下面重试。</p>
+        <button id="offline-retry" class="btn primary">重试</button>
+        <div class="offline-local">
+          <span class="offline-local-tip">或导入本地文件继续使用</span>
+          <div class="offline-local-row">
+            <button class="offline-local-btn" data-local="image" title="导入本地图片"><svg><use href="#i-image"></use></svg><span>图片</span></button>
+            <button class="offline-local-btn" data-local="text" title="导入本地文本"><svg><use href="#i-reader"></use></svg><span>文本</span></button>
+            <button class="offline-local-btn" data-local="video" title="导入本地视频"><svg><use href="#i-play"></use></svg><span>视频</span></button>
+            <button class="offline-local-btn" data-local="audio" title="导入本地音频"><svg><use href="#i-headphone"></use></svg><span>音频</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="rz" data-dir="n"></div>
+      <div class="rz" data-dir="s"></div>
+      <div class="rz" data-dir="w"></div>
+      <div class="rz" data-dir="e"></div>
+      <div class="rz corner" data-dir="nw"></div>
+      <div class="rz corner" data-dir="ne"></div>
+      <div class="rz corner" data-dir="sw"></div>
+      <div class="rz corner" data-dir="se"></div>
+    </main>
+  </div>
+
+  <div id="popover" class="popover hidden"></div>
+  <div id="tip" class="tip hidden" role="tooltip"></div>
+  <div id="toasts" class="toasts"></div>
+
+  <script src="../assets/pinyin-pro.js"></script>
+  <script src="shell.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "floatingdock",
+  "productName": "PANE",
+  "version": "1.0.0",
+  "description": "把任意网站挂到桌面上的极简悬浮窗",
+  "main": "main/main.js",
+  "private": true,
+  "author": "PANE",
+  "license": "MIT"
+}
